@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model CV {
+  id         String   @id @default(uuid())
+  fileName   String
+  rawText    String
+  parsedJson Json?
+  createdAt  DateTime @default(now())
+}
+
+model Project {
+  id          String   @id @default(uuid())
+  projectName String
+  description String
+  skills      String[]
+  createdAt   DateTime @default(now())
+}
+
+model EmbeddingChunk {
+  id        String   @id @default(uuid())
+  chunk     String
+  vector    Float[]
+  source    String
+  createdAt DateTime @default(now())
+}
