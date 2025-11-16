@@ -7,10 +7,13 @@ export const uploadController = async (req: Request, res: Response) => {
     const reportFile = (req.files as any)?.report?.[0];
 
     if (!cvFile && !reportFile) {
-      return res.status(400).json({ message: "No files uploaded (expect cv and/or report)" });
+      return res.status(400).json({ 
+        success: false, 
+        message: "No files uploaded (expect cv and/or report)" 
+      });
     }
 
-    const results: any = {};
+    const results: Record<string, any> = {};
 
     if (cvFile) {
       results.cv = await fileService.saveFileMeta(cvFile);
@@ -19,12 +22,18 @@ export const uploadController = async (req: Request, res: Response) => {
       results.report = await fileService.saveFileMeta(reportFile);
     }
 
-    return res.json({
+    return res.status(201).json({
       success: true,
-      data: results
+      data: {
+        ...(results.cv && { cv_id: results.cv.id }),
+        ...(results.report && { report_id: results.report.id })
+      }
     });
   } catch (err: any) {
     console.error("uploadController error:", err);
-    return res.status(500).json({ success: false, message: err.message || "upload failed" });
+    return res.status(500).json({ 
+      success: false, 
+      message: err.message || "Upload failed" 
+    });
   }
 };

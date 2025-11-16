@@ -7,6 +7,7 @@ export const fileRepository = {
     mimetype: string;
     path: string;
     size: number;
+    createdAt: Date;
   }) => {
     return prisma.file.create({
       data: {
@@ -14,7 +15,8 @@ export const fileRepository = {
         originalName: data.originalName,
         mimetype: data.mimetype,
         path: data.path,
-        size: data.size
+        size: data.size,
+        createdAt: data.createdAt
       }
     });
   },
