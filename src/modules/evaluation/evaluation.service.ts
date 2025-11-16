@@ -10,10 +10,15 @@ export const evaluationService = {
         jobTitle,
         cvId,
         reportId,
-        status: "queued"
+        status: "queued",
+        cvMatchRate: null,
+        cvFeedback: null,
+        projectScore: null,
+        projectFeedback: null,
+        overallSummary: null
       }
     });
-    
+
     await redis.lpush("evaluation_queue", job.id);
     return job;
   },
