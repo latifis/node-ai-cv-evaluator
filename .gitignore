@@ -32,3 +32,6 @@ dump.rdb
 
 # Prisma migrations (optional)
 prisma/migrations/
+
+# Uploads
+uploads/
