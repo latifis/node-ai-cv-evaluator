@@ -30,3 +30,13 @@ model EmbeddingChunk {
   source    String
   createdAt DateTime @default(now())
 }
+
+model File {
+  id           String   @id @default(uuid())
+  filename     String
+  originalName String
+  mimetype     String
+  path         String
+  size         Int
+  createdAt    DateTime @default(now())
+}
