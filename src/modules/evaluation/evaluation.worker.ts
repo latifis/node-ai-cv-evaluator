@@ -1,6 +1,6 @@
 import Redis from "ioredis";
 import { prisma } from "../../config/db";
-import { extractTextFromPdf } from "../file/parsePdf.js";
+import { extractTextFromPdf } from "../file/parsePdf";
 import { backoff } from "../../lib/backoff";
 import { llmEvaluateCv, llmEvaluateProject, llmFinalSummary } from "./llm.evaluators";
 
